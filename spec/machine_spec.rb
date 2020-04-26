@@ -22,4 +22,11 @@ RSpec.describe Machine do
       machine.insert_coin('1p')
     end
   end
+
+  describe '#add_to_change_holder' do
+    it 'adds coin to change holder' do
+      expect(machine.change_holder).to receive(:add_coin)
+      machine.add_to_change_holder('1p')
+    end
+  end
 end

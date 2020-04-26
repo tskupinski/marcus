@@ -10,7 +10,8 @@ RSpec.describe Transaction do
         result = Transaction.from_product('Mars', Inventory.new)
 
         expect(result).to be_kind_of(Transaction)
-        expect(result.product).to be_kind_of(Product)
+        expect(result.product.name).to eq('Mars')
+        expect(result.product.price).to eq(100)
       end
     end
 

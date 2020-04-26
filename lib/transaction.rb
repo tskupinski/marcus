@@ -19,8 +19,4 @@ class Transaction
   def add_coin(coin)
     coins << CoinsFactory.build(coin)
   end
-
-  private
-  
-  attr_writer :coins
 end
