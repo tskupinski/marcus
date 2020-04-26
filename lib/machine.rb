@@ -17,6 +17,10 @@ class Machine
     self.transaction = Transaction.from_product(name, inventory)
   end
 
+  def insert_coin(coin)
+    transaction.add_coin(coin)
+  end
+
   private
 
   attr_reader :inventory

@@ -1,9 +1,13 @@
+require 'coin'
+require 'coins_factory'
+
 class Transaction
-  def initialize(product)
+  def initialize(product = nil)
     @product = product
+    @coins = []
   end
 
-  attr_reader :product
+  attr_reader :product, :coins
 
   def self.from_product(name, inventory)
     product = inventory.fetch_product(name)
@@ -11,4 +15,12 @@ class Transaction
 
     new(product)
   end
+
+  def add_coin(coin)
+    coins << CoinsFactory.build(coin)
+  end
+
+  private
+  
+  attr_writer :coins
 end

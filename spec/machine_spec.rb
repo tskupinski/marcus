@@ -15,4 +15,11 @@ RSpec.describe Machine do
       expect(machine.transaction).to be_kind_of(Transaction)
     end
   end
+
+  describe '#insert_coin' do
+    it 'adds coin to transaction' do
+      expect(machine.transaction).to receive(:add_coin)
+      machine.insert_coin('1p')
+    end
+  end
 end
