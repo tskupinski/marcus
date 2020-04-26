@@ -8,4 +8,11 @@ RSpec.describe Machine do
       expect(machine.list_products).to be_kind_of(Array)
     end
   end
+
+  describe '#select_product' do
+    it 'creates the transaction' do
+      machine.select_product('Mars')
+      expect(machine.transaction).to be_kind_of(Transaction)
+    end
+  end
 end

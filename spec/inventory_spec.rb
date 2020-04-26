@@ -18,4 +18,24 @@ RSpec.describe Inventory do
       expect(inventory.list_products[0]).to eq("#{subject.products[0].name}, price: #{subject.products[0].price} p")
     end
   end
+
+  describe '#fetch_product' do
+    context 'when the product name matches product in the inventory' do
+      it 'returns the product' do
+        result = inventory.fetch_product('Mars')
+
+        expect(result).to be_kind_of(Product)
+        expect(result.name).to eq('Mars')
+        expect(result.price).to eq(100)
+      end
+    end
+
+    context 'when the product name does not match any product in the inventory' do
+      it 'returns nil' do
+        result = inventory.fetch_product('invalid_product')
+
+        expect(result).to eq(nil)
+      end
+    end
+  end
 end
