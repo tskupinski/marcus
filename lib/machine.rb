@@ -7,7 +7,7 @@ class Machine
   end
 
   def list_products
-    inventory.products
+    inventory.list_products
   end
 
   private
