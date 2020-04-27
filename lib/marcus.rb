@@ -30,6 +30,8 @@ class Marcus
         insert_coin(input)
       when 'add'
         add_coins(input)
+      when 'restock'
+        restock_products(input)
       when 'help'
         display_help
       when 'exit'
@@ -87,12 +89,19 @@ class Marcus
   end
 
   def add_coins(input)
-
-    denomination, amount = input[1].split(' ')
+    denomination, amount = input[1]&.split(' ')
 
     machine.add_to_treasury(denomination, amount.to_i)
 
     puts 'Coins added to treasury!'
+  end
+
+  def restock_products(input)
+    name, amount = input[1]&.split(' ')
+
+    machine.restock_product(name, amount.to_i)
+
+    puts 'Products added to machine inventory!'
   end
 
 
