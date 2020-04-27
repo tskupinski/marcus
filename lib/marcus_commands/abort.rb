@@ -14,7 +14,7 @@ module MarcusCommands
 
     private
 
-    attr_reader :machine, :details
+    attr_reader :machine
 
     def print_transaction_aborted
       puts 'Transaction aborted! Please pick up your coins!'

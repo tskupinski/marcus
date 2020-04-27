@@ -22,7 +22,6 @@ class Treasury
   attr_accessor :coins
 
   def restock_coins(denomination, amount)
-    # TODO: Consider having null coin instead of raising error
     coin = coins.find { |c| c.denomination == denomination } || raise_error
     coin.increase_quantity(amount)
   end

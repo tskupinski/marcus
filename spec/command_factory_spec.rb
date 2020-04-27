@@ -26,6 +26,24 @@ RSpec.describe CommandFactory do
       it { is_expected.to be_a(MarcusCommands::Abort) }
     end
 
+    context 'with add instruction' do
+      let(:command_input) { CommandInput.from_text('add') }
+
+      it { is_expected.to be_a(MarcusCommands::Add) }
+    end
+
+    context 'with restock instruction' do
+      let(:command_input) { CommandInput.from_text('restock') }
+
+      it { is_expected.to be_a(MarcusCommands::Restock) }
+    end
+
+    context 'with help instruction' do
+      let(:command_input) { CommandInput.from_text('help') }
+
+      it { is_expected.to be_a(MarcusCommands::Help) }
+    end
+
     context 'with invalid instruction' do
       let(:command_input) { CommandInput.from_text('invalid') }
 

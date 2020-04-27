@@ -17,6 +17,7 @@ class Marcus
     loop do
       text = STDIN.gets.chomp
 
+      separator
       command_input = CommandInput.from_text(text)
 
       CommandFactory.build(command_input, machine, inventory, treasury).execute
@@ -27,11 +28,7 @@ class Marcus
      #  case input[0]
      #  when 'insert'
      #    insert_coin(input)
-     #  when 'add'
-     #    add_coins(input)
-     #  when 'restock'
-     #    restock_products(input)
-     #  when 'help'
+    #  when 'help'
      #    display_help
      #  when 'exit'
      #    say_goodbye
@@ -60,29 +57,6 @@ class Marcus
     end
   end
 
-  def add_coins(input)
-    denomination, amount = input[1]&.split(' ')
-
-    machine.add_to_treasury(denomination, amount.to_i)
-
-    puts 'Coins added to treasury!'
-  end
-
-  def restock_products(input)
-    name, amount = input[1]&.split(' ')
-
-    machine.restock_product(name, amount.to_i)
-
-    puts 'Products added to machine inventory!'
-  end
-
-
-
-
-
-
-
-
 
 
 
@@ -90,7 +64,7 @@ class Marcus
 
   def say_hello
     puts 'This is new day full of great opportunities!'
-    puts 'Welcome to vending machine, please type help to review avaliable commands'
+    puts 'Welcome to vending machine, please type <help> to review avaliable commands'
   end
 
   def display_help
