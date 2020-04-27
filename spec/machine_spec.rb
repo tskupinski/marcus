@@ -15,6 +15,7 @@ RSpec.describe Machine do
       machine.restock_product('Mars', 10)
     end
   end
+
   describe '#select_product' do
     it 'creates the transaction' do
       machine.select_product('Mars')

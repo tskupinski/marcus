@@ -16,11 +16,8 @@ RSpec.describe Transaction do
     end
 
     context 'when the product cannot be fetched from inventory' do
-      it 'creates new transaction without a product' do
-        result = Transaction.from_product('invalid_product', Inventory.new)
-
-        expect(result).to be_kind_of(Transaction)
-        expect(result.product).to eq(nil)
+      it 'raises and error' do
+        expect { Transaction.from_product('invalid_product', Inventory.new) }.to(raise_error(UnsupportedProductError))
       end
     end
   end
