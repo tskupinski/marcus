@@ -1,9 +1,11 @@
 require_relative './marcus_commands/list'
 require_relative './marcus_commands/not_found'
+require_relative './marcus_commands/select'
 
 class CommandFactory
   COMMANDS = {
-    list: MarcusCommands::List
+    list: MarcusCommands::List,
+    select: MarcusCommands::Select
   }.freeze
 
   def self.build(command_input, machine, inventory, treasury)

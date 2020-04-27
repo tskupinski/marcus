@@ -14,6 +14,12 @@ RSpec.describe CommandFactory do
       it { is_expected.to be_a(MarcusCommands::List) }
     end
 
+    context 'with select instruction' do
+      let(:command_input) { CommandInput.from_text('select') }
+
+      it { is_expected.to be_a(MarcusCommands::Select) }
+    end
+
     context 'with invalid instruction' do
       let(:command_input) { CommandInput.from_text('invalid') }
 

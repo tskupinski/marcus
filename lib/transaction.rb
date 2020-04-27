@@ -42,7 +42,7 @@ class Transaction
     private
 
     def raise_error
-      raise UnsupportedProductError, 'Unavaliablie product - please select one from list'
+      raise UnsupportedProductError, 'Unavaliable product - please select one from list'
     end
   end
 end
