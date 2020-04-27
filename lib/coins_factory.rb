@@ -13,9 +13,9 @@ class CoinsFactory
     '2£' => 200
   }.freeze
 
-  def self.build(coin)
+  def self.build(denomination)
     # TODO: Try to remove conditional from build method
-    value = VALID_DENOMINATIONS_VALUE_MAP[coin] || UnsupportedCoin.new
-    Coin.new(coin, value)
+    value = VALID_DENOMINATIONS_VALUE_MAP[denomination] || UnsupportedCoin.new
+    Coin.new(denomination, value, 1)
   end
 end

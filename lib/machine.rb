@@ -23,12 +23,12 @@ class Machine
     self.transaction = Transaction.from_product(name, inventory)
   end
 
-  def insert_coin(coin)
-    transaction.add_coin(coin)
+  def insert_coin(denomination)
+    transaction.add_coin(denomination)
   end
 
-  def add_to_treasury(coin)
-    treasury.add_coin(coin)
+  def add_to_treasury(denomination, amount)
+    treasury.restock_coins(denomination, amount)
   end
 
   private

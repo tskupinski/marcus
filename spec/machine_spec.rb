@@ -31,8 +31,8 @@ RSpec.describe Machine do
 
   describe '#add_to_treasury' do
     it 'adds coin to treasury' do
-      expect(machine.treasury).to receive(:add_coin)
-      machine.add_to_treasury('1p')
+      expect(machine.treasury).to receive(:restock_coins)
+      machine.add_to_treasury('1p', 1)
     end
   end
 end

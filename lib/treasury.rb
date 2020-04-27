@@ -1,13 +1,35 @@
-require 'coins_factory'
+require 'coin'
+
+# TODO: Move error to separate file
+class UnsupportedCoinError < StandardError; end
 
 class Treasury
-  def initialize
-    @coins = []
+  STARTING_COINS = [
+    Coin.new('1p', 1, 10),
+    Coin.new('2p', 2, 10),
+    Coin.new('5p', 5, 10),
+    Coin.new('10p', 10, 10),
+    Coin.new('20p', 20, 10),
+    Coin.new('50p', 50, 10),
+    Coin.new('1£', 100, 10),
+    Coin.new('2£', 200, 10)
+  ].freeze
+
+  def initialize(coins = STARTING_COINS)
+    @coins = coins
   end
 
-  attr_reader :coins
+  attr_accessor :coins
 
-  def add_coin(coin)
-    coins << CoinsFactory.build(coin)
+  def restock_coins(denomination, amount)
+    # TODO: Consider having null coin instead of raising error
+    coin = coins.find { |c| c.denomination == denomination } || raise_error
+    coin.increase_quantity(amount)
+  end
+
+  private
+
+  def raise_error
+    raise UnsupportedCoinError, 'Unsupported coin, please use one of supported denominations'
   end
 end

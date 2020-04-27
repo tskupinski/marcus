@@ -22,6 +22,7 @@ class Inventory
   end
 
   def add_product(name, amount)
+    # TODO: Consider having null product instead of error
     product = products.find { |p| p.name == name } || raise_error
     product.increase_quantity(amount)
   end
