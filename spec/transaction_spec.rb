@@ -52,7 +52,15 @@ RSpec.describe Transaction do
         expect(transaction.paid_in_full?).to eq(false)
       end
     end
+  end
 
+  describe '#remaining_payment' do
+    it 'returns the remaining due amount' do
+      transaction = Transaction.new(Product.new('Mars', 100, 10))
+      transaction.add_coin('50p')
+
+      expect(transaction.remaining_payment).to eq(50)
+    end
   end
 
   describe '.from_product' do

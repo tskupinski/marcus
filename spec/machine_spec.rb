@@ -44,7 +44,12 @@ RSpec.describe Machine do
     end
   end
 
-  describe '#end_transaction' do
-    # TODO
+  describe '#abort_transaction' do
+    before { machine.transaction = Transaction.new }
+
+    it 'aborts transaction' do
+      machine.abort_transaction
+      expect(machine.abort_transaction).to eq(nil)
+    end
   end
 end

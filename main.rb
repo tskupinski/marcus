@@ -1,6 +1,3 @@
-require 'machine'
-require 'inventory'
+require_relative 'lib/marcus'
 
-machine = Machine.new
-
-machine.list_products
+Marcus.new.start

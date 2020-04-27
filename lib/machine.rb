@@ -1,15 +1,17 @@
-require 'inventory'
-require 'transaction'
-require 'treasury'
+require_relative './inventory'
+require_relative './transaction'
+require_relative './treasury'
 
 class Machine
-  def initialize
-    @inventory = Inventory.new
+  def initialize(inventory = Inventory.new, treasury = Treasury.new)
+    @inventory = inventory
     @transaction = nil
-    @treasury = Treasury.new
+    @treasury = treasury
   end
 
-  attr_reader :transaction, :treasury, :inventory
+  attr_reader :treasury, :inventory
+  attr_accessor :transaction
+  
 
   def list_products
     inventory.list_products
@@ -35,8 +37,11 @@ class Machine
     inventory.release_product(name)
   end
 
+  def abort_transaction
+    self.transaction = nil
+  end
+
   private
 
-  attr_writer :transaction
 end
 

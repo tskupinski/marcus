@@ -1,7 +1,7 @@
 require 'product'
 
 RSpec.describe Product do
-  subject(:product) { described_class.new('Mars', 100, 10) }
+  subject(:product) { described_class.new('Mars', 245, 10) }
 
   describe '#increase_quantity' do
     it 'increases product quantity' do
@@ -29,6 +29,12 @@ RSpec.describe Product do
         out_of_stock_product = Product.new('Mars', 10, 0)
         expect(out_of_stock_product.avaliable?).to eq(false)
       end
+    end
+  end
+
+  describe '#price_in_pounds' do
+    it 'formats the product price to pounds' do
+      expect(product.price_in_pounds).to eq('£2.45')
     end
   end
 end

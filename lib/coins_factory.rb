@@ -1,5 +1,5 @@
-require 'coin'
-require 'unsupported_coin'
+require_relative './coin'
+require_relative './unsupported_coin'
 
 class CoinsFactory
   VALID_DENOMINATIONS_VALUE_MAP = {

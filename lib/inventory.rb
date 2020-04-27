@@ -1,4 +1,4 @@
-require 'product'
+require_relative './product'
 # TODO: Move to another file
 class UnsupportedProductError < StandardError; end
 
