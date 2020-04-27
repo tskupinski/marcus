@@ -13,10 +13,6 @@ class Inventory
 
   attr_accessor :products
 
-  def list_products
-    products.map { |p| "#{p.name}, price: #{p.price} p" }
-  end
-
   def fetch_product(name)
     product = products.find { |p| p.name == name }
     return product if product&.avaliable?

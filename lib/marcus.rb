@@ -10,11 +10,12 @@ class Marcus
   def start
     say_hello
 
+    separator
+
     loop do
       text = STDIN.gets.chomp
 
       input = text.strip.split(' ', 2)
-
       
       separator
 
@@ -25,6 +26,10 @@ class Marcus
         select_product(input)
       when 'abort'
         abort_transaction
+      when 'insert'
+        insert_coin(input)
+      when 'add'
+        add_coins(input)
       when 'help'
         display_help
       when 'exit'
@@ -55,13 +60,39 @@ class Marcus
     else
       transaction = machine.select_product(input[1]&.capitalize)
       puts "You have selected #{transaction.product.name}"
-      puts "Please pay #{transaction.remaining_payment}p more to receive your merchandise"
+      puts "Please pay #{transaction.remaining_payment}p to receive your merchandise"
     end
   end
 
   def abort_transaction
     machine.abort_transaction
-    puts 'Transaction aborted! Please pick up your coins'
+    puts 'Transaction aborted! Please pick up your coins!'
+  end
+
+  def insert_coin(input)
+    return puts 'Please select product first' unless machine.transaction
+
+    machine.insert_coin(input[1])
+
+    if machine.transaction.paid_in_full?
+      product = machine.transaction.product
+      # TODO implement change
+      # change = transaction.calculate_change
+
+      machine.release_product(product.name)
+      puts "Here is your #{product.name}. Enjoy and come around!"
+    else
+      puts "Please pay #{machine.transaction.remaining_payment}p more to receive your merchandise"
+    end
+  end
+
+  def add_coins(input)
+
+    denomination, amount = input[1].split(' ')
+
+    machine.add_to_treasury(denomination, amount.to_i)
+
+    puts 'Coins added to treasury!'
   end
 
 

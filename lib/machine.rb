@@ -12,11 +12,6 @@ class Machine
   attr_reader :treasury, :inventory
   attr_accessor :transaction
   
-
-  def list_products
-    inventory.list_products
-  end
-
   def restock_product(name, amount)
     inventory.add_product(name, amount)
   end
@@ -40,8 +35,5 @@ class Machine
   def abort_transaction
     self.transaction = nil
   end
-
-  private
-
 end
 

@@ -12,13 +12,6 @@ RSpec.describe Inventory do
     end
   end
 
-  describe '#list_products' do
-    it 'lists the products with price' do
-      expect(inventory.list_products).to be_kind_of(Array)
-      expect(inventory.list_products[0]).to eq("#{subject.products[0].name}, price: #{subject.products[0].price} p")
-    end
-  end
-
   describe '#fetch_product' do
     context 'when the product name matches product in the inventory' do
       before { inventory.products = [Product.new('Mars', 100, 10)] }
