@@ -24,6 +24,10 @@ class Transaction
     end
   end
 
+  def paid_in_full?
+    coins.sum(&:cumulative_value) >= product.price
+  end
+
   class << self
     def from_product(name, inventory)
       product = inventory.fetch_product(name) || raise_error

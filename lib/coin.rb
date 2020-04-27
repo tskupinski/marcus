@@ -11,4 +11,8 @@ class Coin
   def increase_quantity(amount)
     self.quantity += amount
   end
+
+  def cumulative_value
+    quantity * value
+  end
 end
