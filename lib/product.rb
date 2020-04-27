@@ -21,6 +21,6 @@ class Product
   end
 
   def price_in_pounds
-    "£#{price/100.to_i}." + (price.to_f / 100%1).to_s[2..3]
+    "£#{price / 100.to_i}." + (price.to_f / 100 % 1).to_s[2..3]
   end
 end

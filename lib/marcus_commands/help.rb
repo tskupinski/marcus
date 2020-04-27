@@ -32,7 +32,7 @@ module MarcusCommands
         supported coin denomination and amount e.g. add 10p 50
 
         restock <coin denomination> <amount> - restocks product in the machine, you need to provide
-        product name and amount (WARNING: currently you can only restock products which are already 
+        product name and amount (WARNING: currently you can only restock products which are already
         offered by machine no new product types can be added) e.g. restock Mars 100
       HELP
     end

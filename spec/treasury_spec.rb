@@ -21,7 +21,7 @@ RSpec.describe Treasury do
       before { subject.coins = [] }
 
       it 'raises an error' do
-        expect{ treasury.restock_coins('invalid_denomination', 10) }.to(raise_error(UnsupportedCoinError))
+        expect { treasury.restock_coins('invalid_denomination', 10) }.to(raise_error(UnsupportedCoinError))
       end
     end
   end

@@ -58,7 +58,7 @@ RSpec.describe Inventory do
       before { inventory.products = [] }
 
       it 'raises an error' do
-        expect{ inventory.add_product('invalid_product', 10) }.to(raise_error(UnsupportedProductError))
+        expect { inventory.add_product('invalid_product', 10) }.to(raise_error(UnsupportedProductError))
       end
     end
   end
@@ -72,5 +72,4 @@ RSpec.describe Inventory do
       expect(inventory.products[0].quantity).to eq(9)
     end
   end
-
 end

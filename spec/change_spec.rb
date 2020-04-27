@@ -27,7 +27,7 @@ RSpec.describe Change do
     describe 'when it is not possible to return change' do
       it 'raises and error' do
         change = Change.new(10, paid_coins, [])
-        expect{ change.calculate }.to raise_error(InsufficientCoinsError)
+        expect { change.calculate }.to raise_error(InsufficientCoinsError)
       end
     end
   end

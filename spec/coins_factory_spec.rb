@@ -20,7 +20,7 @@ RSpec.describe CoinsFactory do
 
     context 'without valid denomination' do
       it 'raises an error' do
-        expect{ CoinsFactory.build('invalid_denomination') }.to(raise_error(UnsupportedCoinError))
+        expect { CoinsFactory.build('invalid_denomination') }.to(raise_error(UnsupportedCoinError))
       end
     end
   end
