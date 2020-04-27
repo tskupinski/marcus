@@ -23,10 +23,10 @@ RSpec.describe Machine do
     end
   end
 
-  describe '#add_to_change_holder' do
-    it 'adds coin to change holder' do
-      expect(machine.change_holder).to receive(:add_coin)
-      machine.add_to_change_holder('1p')
+  describe '#add_to_treasury' do
+    it 'adds coin to treasury' do
+      expect(machine.treasury).to receive(:add_coin)
+      machine.add_to_treasury('1p')
     end
   end
 end

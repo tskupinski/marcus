@@ -1,6 +1,6 @@
 require 'coins_factory'
 
-class ChangeHolder
+class Treasury
   def initialize
     @coins = []
   end

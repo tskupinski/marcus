@@ -1,15 +1,15 @@
 require 'inventory'
 require 'transaction'
-require 'change_holder'
+require 'treasury'
 
 class Machine
   def initialize
     @inventory = Inventory.new
     @transaction = nil
-    @change_holder = ChangeHolder.new
+    @treasury = Treasury.new
   end
 
-  attr_reader :transaction, :change_holder
+  attr_reader :transaction, :treasury
 
   def list_products
     inventory.list_products
@@ -23,13 +23,13 @@ class Machine
     transaction.add_coin(coin)
   end
 
-  def add_to_change_holder(coin)
-    change_holder.add_coin(coin)
+  def add_to_treasury(coin)
+    treasury.add_coin(coin)
   end
 
   private
 
   attr_reader :inventory
-  attr_writer :transaction, :change_holder
+  attr_writer :transaction
 end
 
