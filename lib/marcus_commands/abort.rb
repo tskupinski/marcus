@@ -5,8 +5,12 @@ module MarcusCommands
     end
 
     def execute
-      machine.clear_transaction
-      print_transaction_aborted
+      if machine.transaction
+        machine.clear_transaction
+        print_transaction_aborted
+      else
+        print_no_transaction
+      end
     end
 
     private
@@ -15,6 +19,10 @@ module MarcusCommands
 
     def print_transaction_aborted
       puts 'Transaction aborted! Please pick up your coins!'
+    end
+
+    def print_no_transaction
+      puts 'No transaction to abort'
     end
   end
 end

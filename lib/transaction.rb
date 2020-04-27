@@ -2,7 +2,6 @@ require_relative './coin'
 require_relative './coins_factory'
 require_relative './change'
 
-# TODO: Move to another file
 class UnsupportedProductError < StandardError; end
 
 class Transaction

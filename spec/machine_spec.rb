@@ -42,8 +42,8 @@ RSpec.describe Machine do
     before { machine.transaction = Transaction.new }
 
     it 'clears the transaction' do
-      machine.abort_transaction
-      expect(machine.abort_transaction).to eq(nil)
+      machine.clear_transaction
+      expect(machine.transaction).to eq(nil)
     end
   end
 end

@@ -1,4 +1,3 @@
-# TODO: Move error to separate file
 class UnsupportedCoinError < StandardError; end
 
 class UnsupportedCoin

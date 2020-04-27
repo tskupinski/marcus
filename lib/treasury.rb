@@ -1,6 +1,5 @@
 require_relative './coin'
 
-# TODO: Move error to separate file
 class UnsupportedCoinError < StandardError; end
 
 class Treasury
