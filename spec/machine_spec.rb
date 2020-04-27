@@ -36,4 +36,15 @@ RSpec.describe Machine do
       machine.add_to_treasury('1p', 1)
     end
   end
+
+  describe '#release_product' do
+    it 'decreases product quantity in the inventory and finishes the transaction' do
+      expect(machine.inventory).to receive(:release_product)
+      machine.release_product('Mars')
+    end
+  end
+
+  describe '#end_transaction' do
+    # TODO
+  end
 end

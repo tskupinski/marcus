@@ -69,4 +69,15 @@ RSpec.describe Inventory do
       end
     end
   end
+
+  describe '#release_product' do
+    it 'removes product from inventory' do
+      inventory.products = [Product.new('Mars', 100, 10)]
+
+      inventory.release_product('Mars')
+
+      expect(inventory.products[0].quantity).to eq(9)
+    end
+  end
+
 end

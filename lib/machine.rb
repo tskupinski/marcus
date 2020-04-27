@@ -31,6 +31,10 @@ class Machine
     treasury.restock_coins(denomination, amount)
   end
 
+  def release_product(name)
+    inventory.release_product(name)
+  end
+
   private
 
   attr_writer :transaction

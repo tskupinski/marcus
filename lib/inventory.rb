@@ -28,6 +28,11 @@ class Inventory
     product.increase_quantity(amount)
   end
 
+  def release_product(name)
+    product = products.find { |p| p.name == name }
+    product.decrease_quantity(1)
+  end
+
   private
 
   def raise_error

@@ -12,6 +12,10 @@ class Product
     self.quantity += amount
   end
 
+  def decrease_quantity(amount)
+    self.quantity -= amount
+  end
+
   def avaliable?
     quantity.positive?
   end

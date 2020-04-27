@@ -10,6 +10,13 @@ RSpec.describe Product do
     end
   end
 
+  describe '#decrease_quantity' do
+    it 'decreases product quantity' do
+      product.decrease_quantity(1)
+      expect(product.quantity).to eq(9)
+    end
+  end
+
   describe '#avaliable?' do
     context 'when the product quantity is greater than 0' do
       it 'returns true' do
