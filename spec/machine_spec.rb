@@ -9,6 +9,12 @@ RSpec.describe Machine do
     end
   end
 
+  describe '#restock_product' do
+    it 'adds product to inventory' do
+      expect(machine.inventory).to receive(:add_product)
+      machine.restock_product('Mars', 10)
+    end
+  end
   describe '#select_product' do
     it 'creates the transaction' do
       machine.select_product('Mars')

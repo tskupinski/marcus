@@ -9,10 +9,14 @@ class Machine
     @treasury = Treasury.new
   end
 
-  attr_reader :transaction, :treasury
+  attr_reader :transaction, :treasury, :inventory
 
   def list_products
     inventory.list_products
+  end
+
+  def restock_product(name, amount)
+    inventory.add_product(name, amount)
   end
 
   def select_product(name)
@@ -29,7 +33,6 @@ class Machine
 
   private
 
-  attr_reader :inventory
   attr_writer :transaction
 end
 

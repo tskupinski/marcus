@@ -21,6 +21,8 @@ RSpec.describe Inventory do
 
   describe '#fetch_product' do
     context 'when the product name matches product in the inventory' do
+      before { inventory.products = [ Product.new('Mars', 100, 10) ] }
+
       it 'returns the product' do
         result = inventory.fetch_product('Mars')
 
@@ -31,10 +33,24 @@ RSpec.describe Inventory do
     end
 
     context 'when the product name does not match any product in the inventory' do
+      before { inventory.products = [] }
+
       it 'returns nil' do
         result = inventory.fetch_product('invalid_product')
 
         expect(result).to eq(nil)
+      end
+    end
+  end
+  
+  describe '#add_product' do
+    context 'when the product is present in the inventory' do
+      before { inventory.products = [Product.new('Mars', 100, 10)] }
+
+      it 'increases product quantity' do
+        inventory.add_product('Mars', 10)
+        
+        expect(inventory.products[0].quantity).to eq(20)
       end
     end
   end
