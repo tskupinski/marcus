@@ -1,4 +1,6 @@
 require 'product'
+# TODO: Move to another file
+class UnsupportedProductError < StandardError; end
 
 class Inventory
   STARTING_STOCK = [
@@ -20,7 +22,13 @@ class Inventory
   end
 
   def add_product(name, amount)
-    product = products.find { |p| p.name == name }
+    product = products.find { |p| p.name == name } || raise_error
     product.increase_quantity(amount)
+  end
+
+  private
+
+  def raise_error
+    raise UnsupportedProductError, 'Invalid product, please restock one of avaliable types'
   end
 end

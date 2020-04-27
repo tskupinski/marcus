@@ -42,15 +42,22 @@ RSpec.describe Inventory do
       end
     end
   end
-  
+
   describe '#add_product' do
     context 'when the product is present in the inventory' do
       before { inventory.products = [Product.new('Mars', 100, 10)] }
 
       it 'increases product quantity' do
         inventory.add_product('Mars', 10)
-        
         expect(inventory.products[0].quantity).to eq(20)
+      end
+    end
+
+    context 'when provided name does not mach product in the inventory' do
+      before { inventory.products = [] }
+
+      it 'raises an error' do
+        expect{ inventory.add_product('invalid_product', 10) }.to(raise_error(UnsupportedProductError))
       end
     end
   end
