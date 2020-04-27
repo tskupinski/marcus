@@ -1,4 +1,6 @@
 require_relative './machine'
+require_relative './command_input'
+require_relative './command_factory'
 
 class Marcus
   def initialize
@@ -15,13 +17,14 @@ class Marcus
     loop do
       text = STDIN.gets.chomp
 
-      input = text.strip.split(' ', 2)
+      command_input = CommandInput.from_text(text)
+
+      CommandFactory.build(command_input, machine, inventory, treasury).execute
+
       
       separator
 
       case input[0]
-      when 'list'
-        list_products
       when 'select'
         select_product(input)
       when 'abort'
@@ -41,16 +44,6 @@ class Marcus
 
       separator
       next_command_please
-    end
-  end
-
-  def list_products
-    products = inventory.products
-
-    products.each do |product|
-      next if product.quantity <= 0
-
-      puts "#{product.name} at a price of #{product.price_in_pounds}"
     end
   end
 
