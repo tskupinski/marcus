@@ -28,4 +28,3 @@ module MarcusCommands
     end
   end
 end
-

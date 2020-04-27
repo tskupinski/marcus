@@ -24,44 +24,23 @@ class Marcus
       
       separator
 
-      case input[0]
-      when 'select'
-        select_product(input)
-      when 'abort'
-        abort_transaction
-      when 'insert'
-        insert_coin(input)
-      when 'add'
-        add_coins(input)
-      when 'restock'
-        restock_products(input)
-      when 'help'
-        display_help
-      when 'exit'
-        say_goodbye
-        break
-      end
-
+     #  case input[0]
+     #  when 'insert'
+     #    insert_coin(input)
+     #  when 'add'
+     #    add_coins(input)
+     #  when 'restock'
+     #    restock_products(input)
+     #  when 'help'
+     #    display_help
+     #  when 'exit'
+     #    say_goodbye
+     #    break
+     #  end
+     #
       separator
       next_command_please
     end
-  end
-
-  def select_product(input)
-    # TODO: Add rescue from error
-
-    if machine.transaction
-      puts 'Please finish or abort current transaction'
-    else
-      transaction = machine.select_product(input[1]&.capitalize)
-      puts "You have selected #{transaction.product.name}"
-      puts "Please pay #{transaction.remaining_payment}p to receive your merchandise"
-    end
-  end
-
-  def abort_transaction
-    machine.abort_transaction
-    puts 'Transaction aborted! Please pick up your coins!'
   end
 
   def insert_coin(input)
