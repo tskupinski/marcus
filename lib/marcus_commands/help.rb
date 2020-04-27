@@ -1,11 +1,6 @@
 module MarcusCommands
   class Help
-    def initialize(details, machine, inventory, treasury)
-      @details = details
-      @machine = machine
-      @inventory = inventory
-      @treasury = treasury
-    end
+    def initialize(_details, _machine, _inventory, _treasury); end
 
     def execute
       print_help

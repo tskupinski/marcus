@@ -1,10 +1,7 @@
 module MarcusCommands
   class Abort
-    def initialize(details, machine, inventory, treasury)
-      @details = details
+    def initialize(_details, machine, _inventory, _treasury)
       @machine = machine
-      @inventory = inventory
-      @treasury = treasury
     end
 
     def execute

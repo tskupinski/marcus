@@ -10,6 +10,7 @@ class CommandFactory
   COMMANDS = {
     list: MarcusCommands::List,
     select: MarcusCommands::Select,
+    # insert: MarcusCommands::Insert,
     abort: MarcusCommands::Abort,
     add: MarcusCommands::Add,
     restock: MarcusCommands::Restock,

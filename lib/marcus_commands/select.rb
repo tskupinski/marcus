@@ -1,15 +1,13 @@
 module MarcusCommands
   class Select
-    def initialize(details, machine, inventory, treasury)
+    def initialize(details, machine, _inventory, _treasury)
       @details = details
       @machine = machine
-      @inventory = inventory
-      @treasury = treasury
     end
 
     def execute
       if machine.transaction
-        puts 'Please finish or abort current transaction'
+        print_transaction_exists
       else
         transaction = machine.select_product(details&.capitalize)
         print_transaction_details(transaction)
@@ -21,6 +19,10 @@ module MarcusCommands
     private
 
     attr_reader :machine, :details
+
+    def print_transaction_exists
+      puts 'Please finish or abort current transaction'
+    end
 
     def print_transaction_details(transaction)
       puts "You have selected #{transaction.product.name}"

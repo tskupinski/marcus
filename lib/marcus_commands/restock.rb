@@ -1,10 +1,8 @@
 module MarcusCommands
   class Restock
-    def initialize(details, machine, inventory, treasury)
+    def initialize(details, machine, _inventory, _treasury)
       @details = details
       @machine = machine
-      @inventory = inventory
-      @treasury = treasury
     end
 
     def execute

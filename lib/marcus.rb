@@ -22,19 +22,6 @@ class Marcus
 
       CommandFactory.build(command_input, machine, inventory, treasury).execute
 
-      
-      separator
-
-     #  case input[0]
-     #  when 'insert'
-     #    insert_coin(input)
-    #  when 'help'
-     #    display_help
-     #  when 'exit'
-     #    say_goodbye
-     #    break
-     #  end
-     #
       separator
       next_command_please
     end
