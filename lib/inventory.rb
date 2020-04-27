@@ -18,7 +18,8 @@ class Inventory
   end
 
   def fetch_product(name)
-    products.find { |p| p.name == name }
+    product = products.find { |p| p.name == name }
+    return product if product&.avaliable?
   end
 
   def add_product(name, amount)

@@ -21,12 +21,11 @@ RSpec.describe Inventory do
 
   describe '#fetch_product' do
     context 'when the product name matches product in the inventory' do
-      before { inventory.products = [ Product.new('Mars', 100, 10) ] }
+      before { inventory.products = [Product.new('Mars', 100, 10)] }
 
       it 'returns the product' do
         result = inventory.fetch_product('Mars')
 
-        expect(result).to be_kind_of(Product)
         expect(result.name).to eq('Mars')
         expect(result.price).to eq(100)
       end
@@ -37,6 +36,15 @@ RSpec.describe Inventory do
 
       it 'returns nil' do
         result = inventory.fetch_product('invalid_product')
+
+        expect(result).to eq(nil)
+      end
+    end
+
+    context 'when the product matches the product in the inventory but its quantity is equal 0' do
+      before { inventory.products = [Product.new('Mars', 100, 0)] }
+      it 'returns  nil' do
+        result = inventory.fetch_product('Mars')
 
         expect(result).to eq(nil)
       end

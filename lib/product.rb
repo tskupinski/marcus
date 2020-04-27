@@ -5,10 +5,14 @@ class Product
     @quantity = quantity
   end
 
-  attr_reader :name, :price#, :quantity
+  attr_reader :name, :price
   attr_accessor :quantity
 
   def increase_quantity(amount)
     self.quantity += amount
+  end
+
+  def avaliable?
+    quantity.positive?
   end
 end
