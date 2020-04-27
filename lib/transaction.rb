@@ -1,5 +1,6 @@
 require_relative './coin'
 require_relative './coins_factory'
+require_relative './change'
 
 # TODO: Move to another file
 class UnsupportedProductError < StandardError; end
@@ -14,7 +15,6 @@ class Transaction
   attr_accessor :coins
 
   def add_coin(denomination)
-    # FIXME: Get rid of conditional
     coin = coins.find { |c| c.denomination == denomination }
 
     if coin
@@ -30,6 +30,10 @@ class Transaction
 
   def remaining_payment
     product.price - coins.sum(&:cumulative_value)
+  end
+
+  def calculate_change(avaliable_coins)
+    Change.new(product.price, coins, avaliable_coins).calculate
   end
 
   class << self

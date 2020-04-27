@@ -2,6 +2,7 @@ require 'treasury'
 
 RSpec.describe Treasury do
   subject(:treasury) { described_class.new }
+
   describe '#restock_coins' do
     context 'when the coin of given denomination is in the treasury' do
       before { subject.coins = [Coin.new('1p', 1, 10)] }
@@ -18,10 +19,20 @@ RSpec.describe Treasury do
 
     context 'when there is no coin of given denomination in the treasury' do
       before { subject.coins = [] }
-      
+
       it 'raises an error' do
         expect{ treasury.restock_coins('invalid_denomination', 10) }.to(raise_error(UnsupportedCoinError))
       end
+    end
+  end
+
+  describe '#subtract_coins' do
+    before { subject.coins = [Coin.new('1p', 1, 10), Coin.new('2p', 2, 10)] }
+
+    it 'lowers coins quantity' do
+      subject.subtract_coins([1, 1, 1, 2, 2])
+      expect(subject.coins[0].quantity).to eq(7)
+      expect(subject.coins[1].quantity).to eq(8)
     end
   end
 end

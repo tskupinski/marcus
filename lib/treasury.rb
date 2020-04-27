@@ -26,6 +26,13 @@ class Treasury
     coin.increase_quantity(amount)
   end
 
+  def subtract_coins(values)
+    values.each do |value|
+      coin = coins.find { |c| c.value == value }
+      coin.decrease_quantity(1)
+    end
+  end
+
   private
 
   def raise_error

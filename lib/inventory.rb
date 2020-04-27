@@ -4,7 +4,13 @@ class UnsupportedProductError < StandardError; end
 
 class Inventory
   STARTING_STOCK = [
-    Product.new('Mars', 100, 10), Product.new('Water', 50, 10), Product.new('Cola', 75, 10)
+    Product.new('Mars', 100, 10),
+    Product.new('Water', 50, 10),
+    Product.new('Cola', 75, 10),
+    Product.new('Oero', 20, 10),
+    Product.new('Glove', 120, 10),
+    Product.new('Tissue', 15, 10),
+    Product.new('Mask', 300, 10)
   ].freeze
 
   def initialize(products = STARTING_STOCK)

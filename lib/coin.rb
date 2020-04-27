@@ -12,6 +12,10 @@ class Coin
     self.quantity += amount
   end
 
+  def decrease_quantity(amount)
+    self.quantity -= amount
+  end
+
   def cumulative_value
     quantity * value
   end

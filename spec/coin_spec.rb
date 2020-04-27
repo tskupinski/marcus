@@ -10,6 +10,13 @@ RSpec.describe Coin do
     end
   end
 
+  describe '#increase_quantity' do
+    it 'increases coin quantity' do
+      coin.decrease_quantity(5)
+      expect(coin.quantity).to eq(5)
+    end
+  end
+
   describe '#cumulative_value' do
     it 'returns cumulative value of coins' do
       expect(coin.cumulative_value).to eq(10)

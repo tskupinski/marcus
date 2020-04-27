@@ -1,6 +1,7 @@
 require_relative './marcus_commands/list'
 require_relative './marcus_commands/not_found'
 require_relative './marcus_commands/select'
+require_relative './marcus_commands/insert'
 require_relative './marcus_commands/abort'
 require_relative './marcus_commands/add'
 require_relative './marcus_commands/restock'
@@ -10,7 +11,7 @@ class CommandFactory
   COMMANDS = {
     list: MarcusCommands::List,
     select: MarcusCommands::Select,
-    # insert: MarcusCommands::Insert,
+    insert: MarcusCommands::Insert,
     abort: MarcusCommands::Abort,
     add: MarcusCommands::Add,
     restock: MarcusCommands::Restock,

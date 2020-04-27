@@ -20,6 +20,12 @@ RSpec.describe CommandFactory do
       it { is_expected.to be_a(MarcusCommands::Select) }
     end
 
+    context 'with insert instruction' do
+      let(:command_input) { CommandInput.from_text('insert') }
+
+      it { is_expected.to be_a(MarcusCommands::Insert) }
+    end
+
     context 'with abort instruction' do
       let(:command_input) { CommandInput.from_text('abort') }
 

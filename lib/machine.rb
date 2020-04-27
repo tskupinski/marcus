@@ -11,7 +11,7 @@ class Machine
 
   attr_reader :treasury, :inventory
   attr_accessor :transaction
-  
+
   def restock_product(name, amount)
     inventory.add_product(name, amount)
   end
@@ -32,7 +32,7 @@ class Machine
     inventory.release_product(name)
   end
 
-  def abort_transaction
+  def clear_transaction
     self.transaction = nil
   end
 end

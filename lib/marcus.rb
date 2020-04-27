@@ -10,67 +10,43 @@ class Marcus
   end
 
   def start
-    say_hello
+    print_hello
 
-    separator
+    print_separator
 
     loop do
-      text = STDIN.gets.chomp
+      command_input = CommandInput.from_text(STDIN.gets.chomp)
 
-      separator
-      command_input = CommandInput.from_text(text)
+      print_separator
 
-      CommandFactory.build(command_input, machine, inventory, treasury).execute
+      execute_command(command_input)
 
-      separator
-      next_command_please
+      print_separator
+
+      print_next_command_request
     end
-  end
-
-  def insert_coin(input)
-    return puts 'Please select product first' unless machine.transaction
-
-    machine.insert_coin(input[1])
-
-    if machine.transaction.paid_in_full?
-      product = machine.transaction.product
-      # TODO implement change
-      # change = transaction.calculate_change
-
-      machine.release_product(product.name)
-      puts "Here is your #{product.name}. Enjoy and come around!"
-    else
-      puts "Please pay #{machine.transaction.remaining_payment}p more to receive your merchandise"
-    end
-  end
-
-
-
-
-
-
-  def say_hello
-    puts 'This is new day full of great opportunities!'
-    puts 'Welcome to vending machine, please type <help> to review avaliable commands'
-  end
-
-  def display_help
-    puts 'This is a content of help section (to be filled)'
-  end
-
-  def next_command_please
-    puts 'Please provide your next command:'
-  end
-
-  def separator
-    puts '-----------------------------------------------'
-  end
-
-  def say_goodbye
-    puts "Dont't forget to come around!"
   end
 
   private
 
   attr_reader :machine, :inventory, :treasury
+
+  def execute_command(command_input)
+    CommandFactory.build(command_input, machine, inventory, treasury).execute
+  end
+
+  def print_hello
+    puts <<~HELLO
+      This is a new day full of great opportunities!
+      Welcome to vending machine, please type <help> to review avaliable commands
+    HELLO
+  end
+
+  def print_separator
+    puts '-----------------------------------------------'
+  end
+
+  def print_next_command_request
+    puts 'Please provide your next command:'
+  end
 end

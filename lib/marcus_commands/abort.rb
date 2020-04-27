@@ -5,7 +5,7 @@ module MarcusCommands
     end
 
     def execute
-      machine.abort_transaction
+      machine.clear_transaction
       print_transaction_aborted
     end
 
