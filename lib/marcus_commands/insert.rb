@@ -28,22 +28,23 @@ module MarcusCommands
     attr_reader :machine, :details, :treasury, :printer
 
     def finalize_transaction
-      change_values = calculate_change_values
+      change = calculate_change
 
-      treasury.subtract_coins(change_values)
-      machine.release_product(current_product.name)
+      treasury.subtract_coins(change)
 
-      printer.release_product(current_product.name)
-      printer.release_change(change_values)
+      machine.release_product(current_product_name)
+
+      printer.release_product(current_product_name)
+      printer.release_change(change)
 
       machine.clear_transaction
     end
 
-    def current_product
-      machine.transaction.product
+    def current_product_name
+      machine.transaction.product.name
     end
 
-    def calculate_change_values
+    def calculate_change
       machine.transaction.calculate_change(treasury.coins)
     end
 
