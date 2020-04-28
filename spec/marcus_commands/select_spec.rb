@@ -3,7 +3,7 @@ require 'machine'
 require 'printer'
 
 RSpec.describe MarcusCommands::Select do
-  let(:machine) { Machine.new }
+  let(:machine) { Machine.new(Inventory.new, Treasury.new, printer) }
   let(:printer) { Printer.new }
 
   context 'when there is already active transaction' do

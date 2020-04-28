@@ -8,10 +8,7 @@ module MarcusCommands
 
     def execute
       name, amount = details&.split(' ')
-
       machine.restock_product(name.capitalize, amount.to_i)
-
-      printer.products_restocked
     rescue UnsupportedProductError => e
       printer.message(e.message)
     end

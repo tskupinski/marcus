@@ -3,7 +3,7 @@ require 'machine'
 require 'printer'
 
 RSpec.describe MarcusCommands::Restock do
-  let(:machine) { Machine.new }
+  let(:machine) { Machine.new(Inventory.new, Treasury.new, printer) }
   let(:printer) { Printer.new }
 
   before { machine.inventory.products = [Product.new('Mars', 100, 10)] }

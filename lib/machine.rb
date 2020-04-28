@@ -15,10 +15,16 @@ class Machine
 
   def restock_product(name, amount)
     inventory.add_product(name, amount)
+    printer.products_restocked
   end
 
   def select_product(name)
-    self.transaction = Transaction.from_product(name, inventory)
+    if transaction
+      printer.transaction_exists
+    else
+      self.transaction = Transaction.from_product(name, inventory)
+      printer.transaction_details(current_product_name, transaction.remaining_payment)
+    end
   end
 
   def insert_coin(denomination)
@@ -43,6 +49,10 @@ class Machine
     self.transaction = nil
   end
 
+  private
+
+  attr_reader :printer
+
   def finalize_transaction
     change = calculate_change
 
@@ -54,10 +64,6 @@ class Machine
 
     clear_transaction
   end
-
-  private
-
-  attr_reader :printer
 
   def current_product_name
     transaction.product.name
@@ -71,4 +77,3 @@ class Machine
     printer.payment_due(transaction.remaining_payment)
   end
 end
-

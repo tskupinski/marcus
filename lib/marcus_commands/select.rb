@@ -7,12 +7,7 @@ module MarcusCommands
     end
 
     def execute
-      if machine.transaction
-        printer.transaction_exists
-      else
-        transaction = machine.select_product(details&.capitalize)
-        printer.transaction_details(transaction.product.name, transaction.remaining_payment)
-      end
+      machine.select_product(details&.capitalize)
     rescue UnsupportedProductError => e
       printer.message(e.message)
     end

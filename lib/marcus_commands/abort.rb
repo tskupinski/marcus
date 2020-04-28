@@ -17,9 +17,5 @@ module MarcusCommands
     private
 
     attr_reader :machine, :printer
-
-    def print_no_transaction
-      puts 'No transaction to abort'
-    end
   end
 end

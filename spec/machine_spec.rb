@@ -8,14 +8,32 @@ RSpec.describe Machine do
   describe '#restock_product' do
     it 'adds product to inventory' do
       expect(machine.inventory).to receive(:add_product)
+      expect(printer).to receive(:products_restocked)
+
       machine.restock_product('Mars', 10)
     end
   end
 
   describe '#select_product' do
-    it 'creates the transaction' do
-      machine.select_product('Mars')
-      expect(machine.transaction).to be_kind_of(Transaction)
+    context 'when there is no active transaction' do
+      it 'creates the transaction' do
+        machine.select_product('Mars')
+        expect(machine.transaction).to be_kind_of(Transaction)
+      end
+
+      it 'prints out transaction details' do
+        expect(printer).to receive(:transaction_details)
+        machine.select_product('Mars')
+      end
+    end
+
+    context 'when transaction already exists' do
+      before { machine.transaction = Transaction.new }
+
+      it 'prints out notification' do
+        expect(printer).to receive(:transaction_exists)
+        machine.select_product('Mars')
+      end
     end
   end
 

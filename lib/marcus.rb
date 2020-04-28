@@ -17,13 +17,9 @@ class Marcus
 
     loop do
       user_input = ask_for_input
-
       print_separator
-
       execute_command(user_input)
-
       print_separator
-
       ask_for_next_command
     end
   end
