@@ -13,20 +13,9 @@ module MarcusCommands
       machine.insert_coin(details)
 
       if machine.transaction.paid_in_full?
-        product = machine.transaction.product
-
-        change_values = machine.transaction.calculate_change(treasury.coins)
-
-        treasury.subtract_coins(change_values)
-
-        machine.release_product(product.name)
-
-        printer.release_product(product.name)
-        printer.release_change(change_values)
-
-        machine.clear_transaction
+        finalize_transaction
       else
-        printer.payment_due(machine.transaction.remaining_payment)
+        print_payment_due
       end
     rescue InsufficientCoinsError => e
       printer.message(e.message)
@@ -37,5 +26,29 @@ module MarcusCommands
     private
 
     attr_reader :machine, :details, :treasury, :printer
+
+    def finalize_transaction
+      change_values = calculate_change_values
+
+      treasury.subtract_coins(change_values)
+      machine.release_product(current_product.name)
+
+      printer.release_product(current_product.name)
+      printer.release_change(change_values)
+
+      machine.clear_transaction
+    end
+
+    def current_product
+      machine.transaction.product
+    end
+
+    def calculate_change_values
+      machine.transaction.calculate_change(treasury.coins)
+    end
+
+    def print_payment_due
+      printer.payment_due(machine.transaction.remaining_payment)
+    end
   end
 end

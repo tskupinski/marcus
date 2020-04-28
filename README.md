@@ -47,6 +47,7 @@ the execution could use some work (I tried not to push time limit more - I have 
 
 
 - There is definitely a place for a Printer/Display object in the Marcus. It's the missing link that would aggregate all the printing methods and allow for better test design and cleaner implementation. This would be my first change if given more time.
+  (I already implemented this point after 8 hours time mark)
 - There is definitely too much going on in the Insert command - I would look for ways to simplify it and push some more responsibilities into objects
 - I would like to avoid raising errors and try to find a place for NullObjects in the application, which will cover corner cases
 - Some of the specs definitely could use unification - I am aware that specs are not as consistent as they should be if I had some time to fix this, I would remove most of lets and subjects and keep the setup in the example to describe behavior better
