@@ -1,6 +1,6 @@
 module MarcusCommands
   class Abort
-    def initialize(_details, machine, _inventory, _treasury)
+    def initialize(_details, machine, _inventory, _treasury, printer)
       @machine = machine
     end
 

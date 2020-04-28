@@ -11,7 +11,7 @@ module MarcusCommands
       200 => '2£'
     }.freeze
 
-    def initialize(details, machine, _inventory, treasury)
+    def initialize(details, machine, _inventory, treasury, printer)
       @details = details
       @machine = machine
       @treasury = treasury

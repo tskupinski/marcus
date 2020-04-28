@@ -1,52 +1,40 @@
 require_relative './machine'
 require_relative './command_input'
 require_relative './command_factory'
+require_relative './printer'
 
 class Marcus
   def initialize
     @treasury = Treasury.new
     @inventory = Inventory.new
     @machine = Machine.new(inventory, treasury)
+    @printer = Printer.new
   end
 
   def start
-    print_hello
+    printer.hello
 
-    print_separator
+    printer.separator
 
     loop do
-      command_input = CommandInput.from_text(STDIN.gets.chomp)
+      user_input = STDIN.gets.chomp
 
-      print_separator
+      printer.separator
 
-      execute_command(command_input)
+      execute_command(user_input)
 
-      print_separator
+      printer.separator
 
-      print_next_command_request
+      printer.next_command_request
     end
   end
 
   private
 
-  attr_reader :machine, :inventory, :treasury
+  attr_reader :machine, :inventory, :treasury, :printer
 
-  def execute_command(command_input)
-    CommandFactory.build(command_input, machine, inventory, treasury).execute
-  end
-
-  def print_hello
-    puts <<~HELLO
-      This is a new day full of great opportunities!
-      Welcome to vending machine, please type <help> to review avaliable commands
-    HELLO
-  end
-
-  def print_separator
-    puts '-----------------------------------------------'
-  end
-
-  def print_next_command_request
-    puts 'Please provide your next command:'
+  def execute_command(user_input)
+    command_input = CommandInput.from_text(user_input)
+    CommandFactory.build(command_input, machine, inventory, treasury, printer).execute
   end
 end

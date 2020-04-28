@@ -1,6 +1,6 @@
 module MarcusCommands
   class Restock
-    def initialize(details, machine, _inventory, _treasury)
+    def initialize(details, machine, _inventory, _treasury, printer)
       @details = details
       @machine = machine
     end

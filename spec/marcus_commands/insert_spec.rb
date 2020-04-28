@@ -3,6 +3,7 @@ require 'machine'
 
 RSpec.describe MarcusCommands::Insert do
   let(:machine) { Machine.new }
+  let(:printer) { Printer.new }
 
   context 'when after inserting coin transaction is not yet paid' do
     before do
@@ -11,7 +12,7 @@ RSpec.describe MarcusCommands::Insert do
     end
 
     it 'adds coin to transaction' do
-      described_class.new('10p', machine, nil, machine.treasury).execute
+      described_class.new('10p', machine, nil, machine.treasury, printer).execute
 
       expect(machine.transaction.remaining_payment).to eq(90)
     end
@@ -23,7 +24,7 @@ RSpec.describe MarcusCommands::Insert do
       machine.treasury.coins = [Coin.new('1p', 1, 10)]
       machine.select_product('Mars')
 
-      described_class.new('10p', machine, nil, machine.treasury).execute
+      described_class.new('10p', machine, nil, machine.treasury, printer).execute
     end
 
     it 'clears the transaction' do

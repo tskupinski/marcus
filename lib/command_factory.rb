@@ -18,9 +18,9 @@ class CommandFactory
     help: MarcusCommands::Help
   }.freeze
 
-  def self.build(command_input, machine, inventory, treasury)
+  def self.build(command_input, machine, inventory, treasury, printer)
     COMMANDS.fetch(
       command_input.instruction&.to_sym, MarcusCommands::NotFound
-    ).new(command_input.details, machine, inventory, treasury)
+    ).new(command_input.details, machine, inventory, treasury, printer)
   end
 end

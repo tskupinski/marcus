@@ -1,6 +1,6 @@
 module MarcusCommands
   class Add
-    def initialize(details, machine, _inventory, _treasury)
+    def initialize(details, machine, _inventory, _treasury, printer)
       @details = details
       @machine = machine
     end

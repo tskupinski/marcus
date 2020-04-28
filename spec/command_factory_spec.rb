@@ -5,7 +5,7 @@ require 'treasury'
 require 'inventory'
 
 RSpec.describe CommandFactory do
-  subject { described_class.build(command_input, Machine.new, Treasury.new, Inventory.new) }
+  subject { described_class.build(command_input, Machine.new, Treasury.new, Inventory.new, Printer.new) }
 
   describe '.build' do
     context 'with list instruction' do

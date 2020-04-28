@@ -1,6 +1,6 @@
 module MarcusCommands
   class Select
-    def initialize(details, machine, _inventory, _treasury)
+    def initialize(details, machine, _inventory, _treasury, _printer)
       @details = details
       @machine = machine
     end
