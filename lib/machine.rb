@@ -35,5 +35,27 @@ class Machine
   def clear_transaction
     self.transaction = nil
   end
+
+  def finalize_transaction(printer)
+    change = calculate_change
+
+    treasury.subtract_coins(change)
+    release_product(current_product_name)
+
+    printer.release_product(current_product_name)
+    printer.release_change(change)
+
+    clear_transaction
+  end
+
+  private
+
+  def current_product_name
+    transaction.product.name
+  end
+
+  def calculate_change
+    transaction.calculate_change(treasury.coins)
+  end
 end
 

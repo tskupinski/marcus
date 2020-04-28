@@ -13,7 +13,7 @@ module MarcusCommands
       machine.insert_coin(details)
 
       if machine.transaction.paid_in_full?
-        finalize_transaction
+        machine.finalize_transaction(printer)
       else
         print_payment_due
       end
@@ -27,25 +27,8 @@ module MarcusCommands
 
     attr_reader :machine, :details, :treasury, :printer
 
-    def finalize_transaction
-      change = calculate_change
-
-      treasury.subtract_coins(change)
-
-      machine.release_product(current_product_name)
-
-      printer.release_product(current_product_name)
-      printer.release_change(change)
-
-      machine.clear_transaction
-    end
-
     def current_product_name
       machine.transaction.product.name
-    end
-
-    def calculate_change
-      machine.transaction.calculate_change(treasury.coins)
     end
 
     def print_payment_due

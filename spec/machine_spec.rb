@@ -1,7 +1,9 @@
 require 'machine'
+require 'printer'
 
 RSpec.describe Machine do
   subject(:machine) { described_class.new }
+  subject(:printer) { Printer.new }
 
   describe '#restock_product' do
     it 'adds product to inventory' do
@@ -44,6 +46,40 @@ RSpec.describe Machine do
     it 'clears the transaction' do
       machine.clear_transaction
       expect(machine.transaction).to eq(nil)
+    end
+  end
+
+  describe '#finalize_transaction' do
+    before do
+      machine.inventory.products = [Product.new('Mars', 5, 2)]
+      machine.treasury.coins = [Coin.new('1p', 1, 10)]
+      machine.select_product('Mars')
+      machine.insert_coin('10p')
+    end
+
+    it 'removes product from the inventory' do
+      machine.finalize_transaction(printer)
+      expect(machine.inventory.products[0].quantity).to eq(1)
+    end
+
+    it 'removes coins for returning change from the treasury' do
+      machine.finalize_transaction(printer)
+      expect(machine.treasury.coins[0].quantity).to eq(5)
+    end
+
+    it 'clears the transaction' do
+      machine.finalize_transaction(printer)
+      expect(machine.transaction).to eq(nil)
+    end
+
+    it 'releases the product' do
+      expect(printer).to receive(:release_product)
+      machine.finalize_transaction(printer)
+    end
+
+    it 'returns change' do
+      expect(printer).to receive(:release_change)
+      machine.finalize_transaction(printer)
     end
   end
 end

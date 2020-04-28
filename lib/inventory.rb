@@ -7,7 +7,7 @@ class Inventory
     Product.new('Water', 50, 10),
     Product.new('Cola', 75, 10),
     Product.new('Oero', 20, 10),
-    Product.new('Glove', 120, 10),
+    Product.new('Glove', 127, 10),
     Product.new('Tissue', 15, 10),
     Product.new('Mask', 300, 10)
   ].freeze
