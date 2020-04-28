@@ -20,9 +20,5 @@ module MarcusCommands
     private
 
     attr_reader :machine, :details, :treasury, :printer
-
-    def current_product_name
-      machine.transaction.product.name
-    end
   end
 end

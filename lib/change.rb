@@ -12,7 +12,6 @@ class Change
     200 => '2£'
   }.freeze
 
-
   def initialize(price, paid_coins, avaliable_coins)
     @price = price
     @paid_coins = paid_coins
@@ -24,16 +23,14 @@ class Change
   def calculate
     due_amount = calculate_due_amount
 
-    change_coins = avaliable_coins_values
-
     result = []
 
-    change_coins.each do |coin|
+    avaliable_coins_values.each do |coin|
       next unless (due_amount / coin).to_int.positive?
 
       result << coin
       due_amount -= coin
-      change_coins.delete_at(change_coins.index(coin))
+      avaliable_coins_values.delete_at(avaliable_coins_values.index(coin))
     end
 
     raise_error if due_amount.positive?
@@ -48,7 +45,7 @@ class Change
   end
 
   def avaliable_coins_values
-    avaliable_coins.map do |coin|
+    @avaliable_coins_values ||= avaliable_coins.map do |coin|
       [coin.value] * coin.quantity
     end.flatten.sort.reverse
   end
