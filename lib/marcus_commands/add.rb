@@ -3,6 +3,7 @@ module MarcusCommands
     def initialize(details, machine, _inventory, _treasury, printer)
       @details = details
       @machine = machine
+      @printer = printer
     end
 
     def execute
@@ -10,17 +11,13 @@ module MarcusCommands
 
       machine.add_to_treasury(denomination, amount.to_i)
 
-      print_coins_added
+      printer.coins_added
     rescue UnsupportedCoinError => e
-      puts e.message
+      printer.message(e.message)
     end
 
     private
 
-    attr_reader :machine, :details
-
-    def print_coins_added
-      puts 'Coins added to treasuery!'
-    end
+    attr_reader :machine, :details, :printer
   end
 end

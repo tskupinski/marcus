@@ -10,7 +10,6 @@ RSpec.describe MarcusCommands::List do
 
     it 'prints products list' do
       expect(printer).to receive(:product_details).twice
-
       described_class.new(nil, nil, inventory, nil, printer).execute
     end
   end
@@ -20,7 +19,6 @@ RSpec.describe MarcusCommands::List do
 
     it 'prints products list' do
       expect(printer).not_to receive(:product_details)
-
       described_class.new(nil, nil, inventory, nil, printer).execute
     end
   end

@@ -2,24 +2,21 @@ module MarcusCommands
   class Abort
     def initialize(_details, machine, _inventory, _treasury, printer)
       @machine = machine
+      @printer = printer
     end
 
     def execute
       if machine.transaction
         machine.clear_transaction
-        print_transaction_aborted
+        printer.transaction_aborted
       else
-        print_no_transaction
+        printer.no_transaction
       end
     end
 
     private
 
-    attr_reader :machine
-
-    def print_transaction_aborted
-      puts 'Transaction aborted! Please pick up your coins!'
-    end
+    attr_reader :machine, :printer
 
     def print_no_transaction
       puts 'No transaction to abort'
