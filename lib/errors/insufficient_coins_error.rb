@@ -1,0 +1,1 @@
+class InsufficientCoinsError < StandardError; end

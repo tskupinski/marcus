@@ -1,4 +1,4 @@
-class InsufficientCoinsError < StandardError; end
+require_relative './errors/insufficient_coins_error'
 
 class Change
   VALUE_TO_DENOMINATION_MAP = {

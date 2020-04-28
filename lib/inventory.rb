@@ -1,5 +1,5 @@
 require_relative './product'
-class UnsupportedProductError < StandardError; end
+require_relative './errors/unsupported_product_error'
 
 class Inventory
   STARTING_STOCK = [

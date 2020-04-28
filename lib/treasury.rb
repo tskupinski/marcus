@@ -1,6 +1,5 @@
 require_relative './coin'
-
-class UnsupportedCoinError < StandardError; end
+require_relative './errors/unsupported_coin_error'
 
 class Treasury
   STARTING_COINS = [

@@ -1,0 +1,1 @@
+class UnsupportedProductError < StandardError; end

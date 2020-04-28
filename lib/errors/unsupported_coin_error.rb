@@ -1,0 +1,1 @@
+class UnsupportedCoinError < StandardError; end

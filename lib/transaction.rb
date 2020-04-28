@@ -2,8 +2,6 @@ require_relative './coin'
 require_relative './coins_factory'
 require_relative './change'
 
-class UnsupportedProductError < StandardError; end
-
 class Transaction
   def initialize(product = nil)
     @product = product
