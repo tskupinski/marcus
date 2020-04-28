@@ -30,7 +30,7 @@ RSpec.describe Treasury do
     before { subject.coins = [Coin.new('1p', 1, 10), Coin.new('2p', 2, 10)] }
 
     it 'lowers coins quantity' do
-      subject.subtract_coins([1, 1, 1, 2, 2])
+      subject.subtract_coins(%w[1p 1p 1p 2p 2p])
       expect(subject.coins[0].quantity).to eq(7)
       expect(subject.coins[1].quantity).to eq(8)
     end

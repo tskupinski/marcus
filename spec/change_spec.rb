@@ -18,9 +18,9 @@ RSpec.describe Change do
 
   describe '#calculate' do
     describe 'when it is possible to return change' do
-      it 'it returns coins values' do
+      it 'it returns coins' do
         change = Change.new(10, paid_coins, avaliable_coins)
-        expect(change.calculate).to eq([100, 50, 20, 10])
+        expect(change.calculate).to eq(['1£', '50p', '20p', '10p'])
       end
     end
 

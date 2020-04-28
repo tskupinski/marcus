@@ -1,15 +1,4 @@
 class Printer
-  VALUE_TO_DENOMINATION_MAP = {
-    1 => '1p',
-    2 => '2p',
-    5 => '5p',
-    10 => '10p',
-    20 => '20p',
-    50 => '50p',
-    100 => '1£',
-    200 => '2£'
-  }.freeze
-
   def hello
     puts <<~HELLO
       This is a new day full of great opportunities!
@@ -70,7 +59,7 @@ class Printer
     puts 'Please pick up your change'
 
     change_values.each do |value|
-      puts "#{VALUE_TO_DENOMINATION_MAP.fetch(value)}"
+      puts value
     end
   end
 
