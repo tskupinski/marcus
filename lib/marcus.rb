@@ -12,20 +12,19 @@ class Marcus
   end
 
   def start
-    printer.hello
-
-    printer.separator
+    say_hello
+    print_separator
 
     loop do
-      user_input = STDIN.gets.chomp
+      user_input = ask_for_input
 
-      printer.separator
+      print_separator
 
       execute_command(user_input)
 
-      printer.separator
+      print_separator
 
-      printer.next_command_request
+      ask_for_next_command
     end
   end
 
@@ -33,8 +32,24 @@ class Marcus
 
   attr_reader :machine, :inventory, :treasury, :printer
 
+  def say_hello
+    printer.hello
+  end
+
+  def print_separator
+    printer.separator
+  end
+
+  def ask_for_input
+    STDIN.gets.chomp
+  end
+
   def execute_command(user_input)
     command_input = CommandInput.from_text(user_input)
     CommandFactory.build(command_input, machine, inventory, treasury, printer).execute
+  end
+
+  def ask_for_next_command
+    printer.next_command_request
   end
 end
