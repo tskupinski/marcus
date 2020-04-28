@@ -3,10 +3,11 @@ require_relative './transaction'
 require_relative './treasury'
 
 class Machine
-  def initialize(inventory = Inventory.new, treasury = Treasury.new)
+  def initialize(inventory = Inventory.new, treasury = Treasury.new, printer = Printer.new)
     @inventory = inventory
     @transaction = nil
     @treasury = treasury
+    @printer = printer
   end
 
   attr_reader :treasury, :inventory
@@ -22,6 +23,12 @@ class Machine
 
   def insert_coin(denomination)
     transaction.add_coin(denomination)
+
+    if transaction.paid_in_full?
+      finalize_transaction
+    else
+      print_payment_due
+    end
   end
 
   def add_to_treasury(denomination, amount)
@@ -36,7 +43,7 @@ class Machine
     self.transaction = nil
   end
 
-  def finalize_transaction(printer)
+  def finalize_transaction
     change = calculate_change
 
     treasury.subtract_coins(change)
@@ -50,12 +57,18 @@ class Machine
 
   private
 
+  attr_reader :printer
+
   def current_product_name
     transaction.product.name
   end
 
   def calculate_change
     transaction.calculate_change(treasury.coins)
+  end
+
+  def print_payment_due
+    printer.payment_due(transaction.remaining_payment)
   end
 end
 

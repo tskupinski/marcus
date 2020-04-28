@@ -7,8 +7,8 @@ class Marcus
   def initialize
     @treasury = Treasury.new
     @inventory = Inventory.new
-    @machine = Machine.new(inventory, treasury)
     @printer = Printer.new
+    @machine = Machine.new(inventory, treasury, printer)
   end
 
   def start

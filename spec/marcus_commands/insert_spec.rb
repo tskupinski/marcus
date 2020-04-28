@@ -3,7 +3,7 @@ require 'machine'
 require 'printer'
 
 RSpec.describe MarcusCommands::Insert do
-  let(:machine) { Machine.new }
+  let(:machine) { Machine.new(Inventory.new, Treasury.new, printer) }
   let(:printer) { Printer.new }
 
   context 'when there is no active transaction' do
@@ -39,6 +39,31 @@ RSpec.describe MarcusCommands::Insert do
 
     it 'finalizes_the_transaction' do
       expect(machine).to receive(:finalize_transaction)
+      described_class.new('10p', machine, nil, machine.treasury, printer).execute
+    end
+
+    it 'clears the transaction' do
+      described_class.new('10p', machine, nil, machine.treasury, printer).execute
+      expect(machine.transaction).to eq(nil)
+    end
+
+    it 'removes coins for returning change from the treasury' do
+      described_class.new('10p', machine, nil, machine.treasury, printer).execute
+      expect(machine.treasury.coins[0].quantity).to eq(5)
+    end
+
+    it 'removes product from the inventory' do
+      described_class.new('10p', machine, nil, machine.treasury, printer).execute
+      expect(machine.inventory.products[0].quantity).to eq(1)
+    end
+
+    it 'releases the product' do
+      expect(printer).to receive(:release_product)
+      described_class.new('10p', machine, nil, machine.treasury, printer).execute
+    end
+
+    it 'returns change' do
+      expect(printer).to receive(:release_change)
       described_class.new('10p', machine, nil, machine.treasury, printer).execute
     end
   end

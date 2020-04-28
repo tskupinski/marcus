@@ -11,12 +11,6 @@ module MarcusCommands
       return printer.no_transaction unless machine.transaction
 
       machine.insert_coin(details)
-
-      if machine.transaction.paid_in_full?
-        machine.finalize_transaction(printer)
-      else
-        print_payment_due
-      end
     rescue InsufficientCoinsError => e
       printer.message(e.message)
     rescue UnsupportedCoinError => e
@@ -29,10 +23,6 @@ module MarcusCommands
 
     def current_product_name
       machine.transaction.product.name
-    end
-
-    def print_payment_due
-      printer.payment_due(machine.transaction.remaining_payment)
     end
   end
 end
